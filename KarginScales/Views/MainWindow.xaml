@@ -5,8 +5,74 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KarginScales"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="800">
+
+
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="0.75*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+
+        <StackPanel Grid.Column="1">
+            <TextBlock Margin="10" HorizontalAlignment="Center">Прибрная панель</TextBlock>
+            <StackPanel Margin="10" Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center">Выбор образца:</TextBlock>
+                <ComboBox Margin="10 0 0 0" Width="200"></ComboBox>
+            </StackPanel>
+            <Grid Margin="0 30 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" HorizontalAlignment="Center">
+                    <TextBlock Margin="5">Максимальная</TextBlock>
+                    <TextBox Margin="0 3 0 0"></TextBox>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+                    <TextBlock Margin="5">Минимальная</TextBlock>
+                    <TextBox Margin="0 3 0 0"></TextBox>
+                </StackPanel>
+            </Grid>
+            <TextBlock Margin="0 40 0 20" 
+                       HorizontalAlignment="Center">Область нагрева/охлажения</TextBlock>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" HorizontalAlignment="Center">
+                    <TextBlock Margin="5">Текущая температура</TextBlock>
+                    <TextBox Margin="0 3 0 0"></TextBox>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+                    <TextBlock Margin="5">Установка температуры</TextBlock>
+                    <TextBox Margin="0 3 0 0"></TextBox>
+                    <Grid Margin="7">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Margin="3" Grid.Column="0"> Up</Button>
+                        <Button Margin="3" Grid.Column="1"> Down</Button>
+                    </Grid>
+                </StackPanel>
+
+            </Grid>
+            <TextBox Margin="0 40 0 5" HorizontalAlignment="Center"></TextBox>
+            <TextBlock Margin="0 5 0 0" HorizontalAlignment="Center">Гамма (деформация)</TextBlock>
+            <Button Margin="0 30 0 0">Пуск</Button>
+        </StackPanel>
+
+        <TabControl Grid.Column="0">
+            <TabItem Header="Весы Карига"></TabItem>
+            <TabItem Header="Данные измерения"></TabItem>
+            <TabItem Header="График"></TabItem>
+        </TabControl>
     </Grid>
 </Window>
