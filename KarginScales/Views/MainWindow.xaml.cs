@@ -8,4 +8,15 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
     }
+
+
+    public void Button_ClickUp(object sender, RoutedEventArgs e)
+    {
+        setup.Data += 1;
+    }
+
+    public void Button_ClickDown(object sender, RoutedEventArgs e)
+    {
+        setup.Data -= 1;
+    }
 }

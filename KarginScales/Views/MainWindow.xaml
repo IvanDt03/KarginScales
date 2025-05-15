@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KarginScales"
+        xmlns:view="clr-namespace:KarginScales.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="800">
 
@@ -26,16 +27,8 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-
-                <StackPanel Grid.Column="0" HorizontalAlignment="Center">
-                    <TextBlock Margin="5">Максимальная</TextBlock>
-                    <TextBox Margin="0 3 0 0"></TextBox>
-                </StackPanel>
-
-                <StackPanel Grid.Column="1" HorizontalAlignment="Center">
-                    <TextBlock Margin="5">Минимальная</TextBlock>
-                    <TextBox Margin="0 3 0 0"></TextBox>
-                </StackPanel>
+                <view:LCDData Grid.Column="0" Title="Максимальная"/>
+                <view:LCDData Grid.Column="1" Title="Минимальная"/>
             </Grid>
             <TextBlock Margin="0 40 0 20" 
                        HorizontalAlignment="Center">Область нагрева/охлажения</TextBlock>
@@ -45,28 +38,40 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column="0" HorizontalAlignment="Center">
-                    <TextBlock Margin="5">Текущая температура</TextBlock>
-                    <TextBox Margin="0 3 0 0"></TextBox>
-                </StackPanel>
+                <view:LCDData x:Name="curr" Grid.Column="0" Title="Текущая температура"
+                              Data="{Binding ElementName=setup, Path=Data, Mode=OneTime}"/>
 
                 <StackPanel Grid.Column="1" HorizontalAlignment="Center">
-                    <TextBlock Margin="5">Установка температуры</TextBlock>
-                    <TextBox Margin="0 3 0 0"></TextBox>
+                    <view:LCDData x:Name="setup" Title="Установка температуры" Data="82"/>
                     <Grid Margin="7">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button Margin="3" Grid.Column="0"> Up</Button>
-                        <Button Margin="3" Grid.Column="1"> Down</Button>
+                        <Button Click="Button_ClickUp" Margin="3" Grid.Column="0"> Up</Button>
+                        <Button Click="Button_ClickDown" Margin="3" Grid.Column="1"> Down</Button>
                     </Grid>
                 </StackPanel>
 
             </Grid>
             <TextBox Margin="0 40 0 5" HorizontalAlignment="Center"></TextBox>
             <TextBlock Margin="0 5 0 0" HorizontalAlignment="Center">Гамма (деформация)</TextBlock>
-            <Button Margin="0 30 0 0">Пуск</Button>
+            <Button Margin="0 30 0 0" Content="Пуск">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="curr"
+                                                     Storyboard.TargetProperty="Data"
+                                                     To="{Binding ElementName=setup, Path=Data}"
+                                                     Duration="0:0:3"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
         </StackPanel>
 
         <TabControl Grid.Column="0">
