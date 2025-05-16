@@ -35,7 +35,7 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <view:LCDData Grid.Column="0" Title="Максимальная" Data="{Binding SelectedPolymer.MaxT}"/>
-                <view:LCDData Grid.Column="1" Title="Минимальная" Data="{Binding SelectedPolymer.MinT}"/>
+                <view:LCDData x:Name="minT" Grid.Column="1" Title="Минимальная" Data="{Binding SelectedPolymer.MinT}"/>
             </Grid>
             <TextBlock Margin="0 40 0 20" 
                        HorizontalAlignment="Center">Область нагрева/охлажения</TextBlock>
@@ -49,7 +49,7 @@
                               Data="{Binding CurrentTemperature}"/>
 
                 <StackPanel Grid.Column="1" HorizontalAlignment="Center">
-                    <view:LCDData x:Name="setup" Title="Установка температуры" Data="{Binding SelectedPolymer.MinT, Mode=OneTime}"/>
+                    <view:LCDData x:Name="setup" Title="Установка температуры" Data="{Binding SelectedPolymer.MinT}"/>
                     <Grid Margin="7">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>

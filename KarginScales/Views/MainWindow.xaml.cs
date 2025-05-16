@@ -1,6 +1,7 @@
 ﻿using KarginScales.Service;
 using KarginScales.ViewModels;
 using System.Windows;
+using System.Windows.Media.Animation;
 
 namespace KarginScales.Views;
 

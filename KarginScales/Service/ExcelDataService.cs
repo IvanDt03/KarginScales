@@ -1,53 +1,41 @@
 ﻿using KarginScales.Models;
 using System.Collections.Generic;
 using ClosedXML.Excel;
-using System.IO;
+using System;
 using System.Linq;
 
 namespace KarginScales.Service;
 
-public class ExcelDataService : IDataService
+public static class ExcelDataService 
 {
-    private readonly XLWorkbook _book;
-    public string FilePath { get; }
-
-    public ExcelDataService(string filePath)
+    public static string ErrorMessage = "";
+    public static List<Polymer> LoadDataFromFile(string path)
     {
-        if (!File.Exists(filePath))
-            throw new FileNotFoundException();
+        var result = new List<Polymer>();
 
-        FilePath = filePath;
-        _book = new XLWorkbook(FilePath);
-    }
 
-    public List<DataPoint> LoadDataPoint(string name)
-    {
-        var result = new List<DataPoint>();
+            using XLWorkbook wb = new XLWorkbook(path);
 
-        if (!_book.TryGetWorksheet(name, out var ws))
-            return result;
-
-        var table = ws.RangeUsed();
-
-        if (table == null)
-            return result;
-
-        for(int row = 2; row <= table.RowCount(); ++row)
-        {
-            result.Add(new DataPoint
+            foreach(var ws in wb.Worksheets)
             {
-                Temperature = table.Cell(row, 1).GetDouble(),
-                Gamma = table.Cell(row, 2).GetDouble()
-            });
-        }
-
+                var polymer = new Polymer(ws.Name, GetListData(ws.RangeUsed()).ToList());
+                result.Add(polymer);
+            }
+                
         return result;
     }
 
-    public List<Polymer> LoadNamesPolymer()
+    private static IEnumerable<DataPoint> GetListData(IXLRange? range)
     {
-        return _book.Worksheets
-            .Select(s => new Polymer(s.Name))
-            .ToList();
+        for (int row = 2; row <= range?.RowCount(); ++row)
+        {
+            DataPoint point = new DataPoint
+            {
+                Temperature = range.Cell(row, 1).GetDouble(),
+                Gamma = range.Cell(row, 2).GetDouble()
+            };
+
+            yield return point;
+        }
     }
 }

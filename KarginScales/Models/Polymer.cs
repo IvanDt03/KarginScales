@@ -1,49 +1,87 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace KarginScales.Models;
 
-public class Polymer
+public class Polymer : INotifyPropertyChanged
 {
     private string _name;
     private double _minT;
     private double _maxT;
-    private List<DataPoint> _data;
+    private ObservableCollection<DataPoint> _data;
 
-    public Polymer(string name) 
+    private ObservableCollection<DataPoint> _measuredData = new ObservableCollection<DataPoint>();
+    public ReadOnlyObservableCollection<DataPoint> MeasuredData;
+
+    public Polymer(string name, List<DataPoint> data)
     {
         _name = name;
-        _data = new List<DataPoint>();
-    }
-
-    private void Initialize(List<DataPoint> data)
-    {
-        _data = data;
+        _data = new ObservableCollection<DataPoint>(data);
         _minT = data.Min(p => p.Temperature);
         _maxT = data.Max(p => p.Temperature);
+
+        MeasuredData = new ReadOnlyObservableCollection<DataPoint>(_measuredData);
+    }
+
+    public bool AddDataPoint(double temperature, double gamma)
+    {
+        var dataPoint = new DataPoint(temperature, gamma);
+        if (_measuredData.Contains(dataPoint))
+            return false;
+
+        _measuredData.Add(dataPoint);
+        OnPropertyChanged(nameof(MeasuredData));
+        return true;
     }
 
     public string Name
     {
-        get { return _name; }
-    }
-    public double MinT
-    {
-        get { return _minT; }
-    }
-    public double MaxT
-    {
-        get { return _maxT; }
-    }
-    public IReadOnlyList<DataPoint> Data
-    {
-        get { return _data; }
+        get => _name;
+        set
+        {
+            _name = value;
+            OnPropertyChanged(nameof(Name));
+        }
     }
 
-    public void Update(List<DataPoint> data)
+    public double MinT
     {
-        if (_data.Count != 0)
-            return;
-        Initialize(data);
+        get => _minT;
+        set
+        {
+            _minT = value;
+            OnPropertyChanged(nameof(_minT));
+        }
+    }
+
+    public double MaxT
+    {
+        get => _maxT;
+        set
+        {
+            _maxT = value;
+            OnPropertyChanged(nameof(MaxT));
+        }
+    }
+
+    public ObservableCollection<DataPoint> Data
+    {
+        get => _data;
+        set
+        {
+            _data = value;
+            OnPropertyChanged(nameof(Data));
+        }
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    private void OnPropertyChanged([CallerMemberName]string propertyName = "")
+    {
+        if (PropertyChanged != null)
+            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

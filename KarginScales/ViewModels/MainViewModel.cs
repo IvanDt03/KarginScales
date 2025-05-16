@@ -1,27 +1,26 @@
 ﻿using KarginScales.Service;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System;
+using KarginScales.Models;
 
 namespace KarginScales.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
-    private IDataService _dataService;
     private double _currentTemperature;
     private double _setupTemperature;
-    private PolymerViewModel _selectedPolymer;
+    private Polymer _selectedPolymer;
 
-    private ObservableCollection<PolymerViewModel> _polymers;
-    public ReadOnlyObservableCollection<PolymerViewModel> Polymers { get; }
+    private ObservableCollection<Polymer> _polymers;
+    public ReadOnlyObservableCollection<Polymer> Polymers { get; }
 
     public MainViewModel()
     {
-        _dataService = new ExcelDataService(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content\\D.xlsx"));
+        string pathFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content\\D.xlsx");
 
-        _polymers = new ObservableCollection<PolymerViewModel>(_dataService.LoadNamesPolymer().Select(p => new PolymerViewModel(p)));
-        Polymers = new ReadOnlyObservableCollection<PolymerViewModel>(_polymers);
+        _polymers = new ObservableCollection<Polymer>(ExcelDataService.LoadDataFromFile(pathFile));
+        Polymers = new ReadOnlyObservableCollection<Polymer>(_polymers);
     }
 
     public double CurrentTemperature
@@ -42,13 +41,12 @@ public class MainViewModel : ViewModelBase
         }
     }
 
-    public PolymerViewModel SelectedPolymer
+    public Polymer SelectedPolymer
     {
         get { return _selectedPolymer; }
         set
         {
             SetValue(ref _selectedPolymer, value, nameof(SelectedPolymer));
-            SelectedPolymer.Update(_dataService.LoadDataPoint(_selectedPolymer.Name));
             CurrentTemperature = _selectedPolymer.MinT;
         }
     }
