@@ -5,9 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KarginScales"
         xmlns:view="clr-namespace:KarginScales.Views"
+        xmlns:vm="clr-namespace:KarginScales.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="800">
 
+    <Window.DataContext>
+        <vm:MainViewModel></vm:MainViewModel>
+    </Window.DataContext>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -20,15 +24,18 @@
             <TextBlock Margin="10" HorizontalAlignment="Center">Прибрная панель</TextBlock>
             <StackPanel Margin="10" Orientation="Horizontal">
                 <TextBlock VerticalAlignment="Center">Выбор образца:</TextBlock>
-                <ComboBox Margin="10 0 0 0" Width="200"></ComboBox>
+                <ComboBox x:Name="cmbPoly" Margin="10 0 0 0" Width="200"
+                          ItemsSource="{Binding Polymers}"
+                          SelectedItem="{Binding SelectedPolymer}"
+                          DisplayMemberPath="Name"></ComboBox>
             </StackPanel>
             <Grid Margin="0 30 0 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <view:LCDData Grid.Column="0" Title="Максимальная"/>
-                <view:LCDData Grid.Column="1" Title="Минимальная"/>
+                <view:LCDData Grid.Column="0" Title="Максимальная" Data="{Binding SelectedPolymer.MaxT}"/>
+                <view:LCDData Grid.Column="1" Title="Минимальная" Data="{Binding SelectedPolymer.MinT}"/>
             </Grid>
             <TextBlock Margin="0 40 0 20" 
                        HorizontalAlignment="Center">Область нагрева/охлажения</TextBlock>
@@ -39,10 +46,10 @@
                 </Grid.ColumnDefinitions>
 
                 <view:LCDData x:Name="curr" Grid.Column="0" Title="Текущая температура"
-                              Data="{Binding ElementName=setup, Path=Data, Mode=OneTime}"/>
+                              Data="{Binding CurrentTemperature}"/>
 
                 <StackPanel Grid.Column="1" HorizontalAlignment="Center">
-                    <view:LCDData x:Name="setup" Title="Установка температуры" Data="82"/>
+                    <view:LCDData x:Name="setup" Title="Установка температуры" Data="{Binding SelectedPolymer.MinT, Mode=OneTime}"/>
                     <Grid Margin="7">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -54,8 +61,8 @@
                 </StackPanel>
 
             </Grid>
-            <view:LCDData Margin="20" Title="Гамма (деформация)"/>
-            <Button Margin="0 30 0 0" Content="Пуск">
+            <view:LCDData Margin="0 20 0 10" Title="Гамма (деформация)"/>
+            <Button Margin="0 25 0 0" Content="Пуск">
                 <Button.Triggers>
                     <EventTrigger RoutedEvent="Button.Click">
                         <EventTrigger.Actions>

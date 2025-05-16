@@ -1,6 +1,8 @@
 ﻿using KarginScales.Service;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System;
 
 namespace KarginScales.ViewModels;
 
@@ -12,17 +14,12 @@ public class MainViewModel : ViewModelBase
     private PolymerViewModel _selectedPolymer;
 
     private ObservableCollection<PolymerViewModel> _polymers;
-    public ReadOnlyObservableCollection<PolymerViewModel> Polymers;
+    public ReadOnlyObservableCollection<PolymerViewModel> Polymers { get; }
 
-    public MainViewModel(IDataService dataService)
+    public MainViewModel()
     {
-        _dataService = dataService;
+        _dataService = new ExcelDataService(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content\\D.xlsx"));
 
-        Initialize();
-    }
-
-    private void Initialize()
-    {
         _polymers = new ObservableCollection<PolymerViewModel>(_dataService.LoadNamesPolymer().Select(p => new PolymerViewModel(p)));
         Polymers = new ReadOnlyObservableCollection<PolymerViewModel>(_polymers);
     }

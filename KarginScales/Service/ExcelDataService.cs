@@ -9,7 +9,6 @@ namespace KarginScales.Service;
 public class ExcelDataService : IDataService
 {
     private readonly XLWorkbook _book;
-
     public string FilePath { get; }
 
     public ExcelDataService(string filePath)

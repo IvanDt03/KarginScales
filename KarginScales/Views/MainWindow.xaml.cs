@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using KarginScales.Service;
+using KarginScales.ViewModels;
+using System.Windows;
 
 namespace KarginScales.Views;
 
