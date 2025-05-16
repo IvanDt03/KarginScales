@@ -1,12 +1,22 @@
-﻿using System;
+﻿using KarginScales.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ClosedXML.Excel;
 
-namespace KarginScales.Service
+namespace KarginScales.Service;
+
+public class ExcelDataService : IDataService
 {
-    class ExcelDataService
+
+    public string FilePath { get; }
+
+
+    public List<DataPoint> LoadDataPoint(string name)
     {
+        throw new System.NotImplementedException();
+    }
+
+    public List<Polymer> LoadNamesPolymer()
+    {
+        throw new System.NotImplementedException();
     }
 }

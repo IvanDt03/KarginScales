@@ -54,8 +54,7 @@
                 </StackPanel>
 
             </Grid>
-            <TextBox Margin="0 40 0 5" HorizontalAlignment="Center"></TextBox>
-            <TextBlock Margin="0 5 0 0" HorizontalAlignment="Center">Гамма (деформация)</TextBlock>
+            <view:LCDData Margin="20" Title="Гамма (деформация)"/>
             <Button Margin="0 30 0 0" Content="Пуск">
                 <Button.Triggers>
                     <EventTrigger RoutedEvent="Button.Click">

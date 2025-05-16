@@ -1,12 +1,11 @@
-﻿using System;
+﻿using KarginScales.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace KarginScales.Service
+namespace KarginScales.Service;
+
+public interface IDataService
 {
-    class IDataService
-    {
-    }
+    List<Polymer> LoadNamesPolymer();
+
+    List<DataPoint> LoadDataPoint(string name);
 }

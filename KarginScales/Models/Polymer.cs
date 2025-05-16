@@ -10,12 +10,10 @@ public class Polymer
     private double _maxT;
     private List<DataPoint> _data;
 
-    public Polymer(string name) : this(name, new List<DataPoint>()) { }
-
-    public Polymer(string name, List<DataPoint> data)
+    public Polymer(string name) 
     {
         _name = name;
-        Initialize(data);
+        _data = new List<DataPoint>();
     }
 
     private void Initialize(List<DataPoint> data)
@@ -23,31 +21,29 @@ public class Polymer
         _data = data;
         _minT = data.Min(p => p.Temperature);
         _maxT = data.Max(p => p.Temperature);
-
-       
     }
 
     public string Name
     {
         get { return _name; }
     }
-
     public double MinT
     {
         get { return _minT; }
     }
-
     public double MaxT
     {
         get { return _maxT; }
     }
-
-    public List<DataPoint> Data
+    public IReadOnlyList<DataPoint> Data
     {
         get { return _data; }
-        set
-        {
-            Initialize(value);
-        }
+    }
+
+    public void Update(List<DataPoint> data)
+    {
+        if (_data.Count != 0)
+            return;
+        Initialize(data);
     }
 }
