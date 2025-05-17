@@ -49,35 +49,20 @@
                               Data="{Binding CurrentTemperature}"/>
 
                 <StackPanel Grid.Column="1" HorizontalAlignment="Center">
-                    <view:LCDData x:Name="setup" Title="Установка температуры" Data="{Binding SelectedPolymer.MinT}"/>
+                    <view:LCDData x:Name="setup" Title="Установка температуры" Data="{Binding SetupTemperature, Mode=TwoWay}"/>
                     <Grid Margin="7">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button Click="Button_ClickUp" Margin="3" Grid.Column="0"> Up</Button>
-                        <Button Click="Button_ClickDown" Margin="3" Grid.Column="1"> Down</Button>
+                        <Button Margin="3" Grid.Column="0" Command="{Binding RaiseTemp}"> Up</Button>
+                        <Button Margin="3" Grid.Column="1" Command="{Binding LowerTemp}"> Down</Button>
                     </Grid>
                 </StackPanel>
 
             </Grid>
-            <view:LCDData Margin="0 20 0 10" Title="Гамма (деформация)"/>
-            <Button Margin="0 25 0 0" Content="Пуск">
-                <Button.Triggers>
-                    <EventTrigger RoutedEvent="Button.Click">
-                        <EventTrigger.Actions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation Storyboard.TargetName="curr"
-                                                     Storyboard.TargetProperty="Data"
-                                                     To="{Binding ElementName=setup, Path=Data}"
-                                                     Duration="0:0:3"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger.Actions>
-                    </EventTrigger>
-                </Button.Triggers>
-            </Button>
+            <view:LCDData Margin="0 20 0 10" Title="Гамма (деформация)" Data="{Binding Gamma}"/>
+            <Button Margin="0 25 0 0" Content="Пуск" Command="{Binding StartMeasurement}"></Button>
         </StackPanel>
 
         <TabControl Grid.Column="0">

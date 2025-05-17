@@ -5,10 +5,10 @@ namespace KarginScales.Commands;
 
 public class RelayCommand : ICommand
 {
-    private readonly Action<object?> _execute;
-    private readonly Func<object?, bool>? _canExcecute;
+    protected readonly Action<object?> _execute;
+    protected readonly Func<object?, bool>? _canExcecute;
 
-    public RelayCommand(Action<object?> execute, Func<object?, bool>? canExecute = null)
+    public RelayCommand(Action<object>? execute, Func<object?, bool>? canExecute = null)
     {
         if (execute == null)
             throw new ArgumentNullException(nameof(execute));
@@ -16,8 +16,8 @@ public class RelayCommand : ICommand
         _canExcecute = canExecute;
     }
 
-    public void Execute(object? parameter) => _execute?.Invoke(parameter);
-    public bool CanExecute(object? parameter) => _canExcecute?.Invoke(parameter) ?? true;
+    public virtual void Execute(object? parameter) => _execute?.Invoke(parameter);
+    public virtual bool CanExecute(object? parameter) => _canExcecute?.Invoke(parameter) ?? true;
 
     public event EventHandler? CanExecuteChanged
     {
