@@ -67,7 +67,14 @@
 
         <TabControl Grid.Column="0">
             <TabItem Header="Весы Карига"></TabItem>
-            <TabItem Header="Данные измерения"></TabItem>
+            <TabItem Header="Данные измерения">
+                <DataGrid ItemsSource="{Binding SelectedPolymer.MeasuredData}" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Температура" Binding="{Binding Temperature}"/>
+                        <DataGridTextColumn Header="Гамма" Binding="{Binding Gamma}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
             <TabItem Header="График"></TabItem>
         </TabControl>
     </Grid>

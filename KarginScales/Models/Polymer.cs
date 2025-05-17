@@ -13,8 +13,7 @@ public class Polymer : INotifyPropertyChanged
     private double _maxT;
     private ObservableCollection<DataPoint> _data;
 
-    private ObservableCollection<DataPoint> _measuredData = new ObservableCollection<DataPoint>();
-    public ReadOnlyObservableCollection<DataPoint> MeasuredData;
+    public ObservableCollection<DataPoint> MeasuredData { get; } = new ObservableCollection<DataPoint>();
 
     public Polymer(string name, List<DataPoint> data)
     {
@@ -22,18 +21,15 @@ public class Polymer : INotifyPropertyChanged
         _data = new ObservableCollection<DataPoint>(data);
         _minT = data.Min(p => p.Temperature);
         _maxT = data.Max(p => p.Temperature);
-
-        MeasuredData = new ReadOnlyObservableCollection<DataPoint>(_measuredData);
     }
 
     public bool AddDataPoint(double temperature, double gamma)
     {
         var dataPoint = new DataPoint(temperature, gamma);
-        if (_measuredData.Contains(dataPoint))
+        if (MeasuredData.Contains(dataPoint))
             return false;
 
-        _measuredData.Add(dataPoint);
-        OnPropertyChanged(nameof(MeasuredData));
+        MeasuredData.Add(dataPoint);
         return true;
     }
 

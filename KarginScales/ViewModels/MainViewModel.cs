@@ -1,31 +1,48 @@
 ﻿using KarginScales.Service;
-using System.Collections.ObjectModel;
 using System.IO;
 using System;
 using KarginScales.Models;
 using KarginScales.Commands;
-using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace KarginScales.ViewModels;
 
-public class MainViewModel : ViewModelBase
+public class MainViewModel : Notifier
 {
     #region Fields
 
     private double _currentTemperature;
     private double _setupTemperature;
     private double _gamma;
+    private MeasuringDevice _device;
     private Polymer _selectedPolymer;
-    private ObservableCollection<Polymer> _polymers;
-
+    public List<Polymer> Polymers { get; }
     #endregion
 
     public MainViewModel()
     {
         string pathFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content\\D.xlsx");
+        Polymers = new List<Polymer>(ExcelDataService.LoadDataFromFile(pathFile));
 
-        _polymers = new ObservableCollection<Polymer>(ExcelDataService.LoadDataFromFile(pathFile));
-        Polymers = new ReadOnlyObservableCollection<Polymer>(_polymers);
+        _device = new MeasuringDevice();
+        _device.PropertyChanged += DeviceOnPropertyChanged;
+    }
+
+    private void DeviceOnPropertyChanged(object sender, PropertyChangedEventArgs args)
+    {
+        switch (args.PropertyName)
+        {
+            case nameof(_device.CurrentTemperature):
+                CurrentTemperature = _device.CurrentTemperature;
+                break;
+            case nameof(_device.Gamma):
+                Gamma = _device.Gamma;
+                break;
+            case nameof(_device.IsRunning):
+                _startMeasurement.RaiseCanExecuteChanged();
+                break;
+        }
     }
 
     #region Propereties
@@ -69,8 +86,6 @@ public class MainViewModel : ViewModelBase
         }
     }
 
-    public ReadOnlyObservableCollection<Polymer> Polymers { get; }
-
     #endregion
 
 
@@ -78,7 +93,7 @@ public class MainViewModel : ViewModelBase
 
     private RelayCommand _raiseTemp;
     private RelayCommand _lowerTemp;
-    private RelayAsyncCommand _startMeasurement;
+    private RelayCommand _startMeasurement;
 
     public RelayCommand RaiseTemp
     {
@@ -88,51 +103,15 @@ public class MainViewModel : ViewModelBase
     {
         get { return _lowerTemp ?? (_lowerTemp = new RelayCommand(o => --SetupTemperature, o => SetupTemperature > SelectedPolymer?.MinT)); }
     }
-    public RelayAsyncCommand StartMeasurement
+    public RelayCommand StartMeasurement
     {
-        get { return _startMeasurement ?? (_startMeasurement = new RelayAsyncCommand(StartMeasurementAsync)); }
+        get { return _startMeasurement ?? 
+                (_startMeasurement = new RelayCommand(OnStartMeasurement, o => !_device.IsRunning)); }
     }
 
-
-    private async void StartMeasurementAsync(object o)
+    private void OnStartMeasurement(object p)
     {
-
-        var targetTemp = SetupTemperature;
-        var step = targetTemp > CurrentTemperature ? 0.1 : -0.1;
-
-        while (Math.Abs(CurrentTemperature - targetTemp) > 0.05)
-        {
-            CurrentTemperature += step;
-            await Task.Delay(100);
-        }
-
-        CurrentTemperature = targetTemp;
-
-        Gamma = InterpolateGamma(SelectedPolymer, CurrentTemperature) ?? 0.0;
-    }
-
-    private double? InterpolateGamma(Polymer? polymer, double temperature)
-    {
-        if (polymer?.Data == null || polymer.Data.Count == 0)
-            return null;
-
-        for (int i = 0; i < polymer.Data.Count; i++)
-        {
-            if (Math.Abs(polymer.Data[i].Temperature - temperature) < 0.0001)
-                return polymer.Data[i].Gamma;
-
-
-            if (polymer.Data[i].Temperature > temperature)
-            {
-                var prev = polymer.Data[i - 1];
-                var current = polymer.Data[i];
-
-                double k = (current.Gamma - prev.Gamma) / (current.Temperature - prev.Temperature);
-                return k * (temperature - prev.Temperature) + prev.Gamma;
-            }
-        }
-
-        return null;
+        _device.StartMeasurement(SelectedPolymer, CurrentTemperature, SetupTemperature);
     }
 
     #endregion
