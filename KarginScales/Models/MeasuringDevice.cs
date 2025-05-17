@@ -17,7 +17,7 @@ public class MeasuringDevice : Notifier
     public MeasuringDevice()
     {
         _timer = new DispatcherTimer();
-        _timer.Interval = TimeSpan.FromMilliseconds(50);
+        _timer.Interval = TimeSpan.FromMilliseconds(80);
         _timer.Tick += OnStartMeasurement;
     }
 
@@ -57,6 +57,7 @@ public class MeasuringDevice : Notifier
             CurrentTemperature = SetupTemperature;
 
             OnPropertyChanged(nameof(IsRunning));
+            OnMeasurementCompleted(CurrentTemperature, Gamma);
             return;
         }
 
@@ -105,5 +106,13 @@ public class MeasuringDevice : Notifier
         }
 
         return 0.0;
+    }
+
+    public event EventHandler<MeasurementCompletedEventArgs>? MeasurementCompleted;
+
+    private void OnMeasurementCompleted(double temperature, double gamma)
+    {
+        if (MeasurementCompleted != null)
+            MeasurementCompleted(this, new MeasurementCompletedEventArgs(temperature, gamma));
     }
 }

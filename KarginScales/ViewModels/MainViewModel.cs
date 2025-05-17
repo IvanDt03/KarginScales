@@ -27,6 +27,7 @@ public class MainViewModel : Notifier
 
         _device = new MeasuringDevice();
         _device.PropertyChanged += DeviceOnPropertyChanged;
+        _device.MeasurementCompleted += OnMeasurementCompleted;
     }
 
     private void DeviceOnPropertyChanged(object sender, PropertyChangedEventArgs args)
@@ -43,6 +44,12 @@ public class MainViewModel : Notifier
                 _startMeasurement.RaiseCanExecuteChanged();
                 break;
         }
+    }
+
+    private void OnMeasurementCompleted(object sender, MeasurementCompletedEventArgs e)
+    {
+        if (SelectedPolymer != null)
+            SelectedPolymer.AddDataPoint(e.Temperature, e.Gamma);
     }
 
     #region Propereties

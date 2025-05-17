@@ -26,8 +26,18 @@ public class Polymer : INotifyPropertyChanged
     public bool AddDataPoint(double temperature, double gamma)
     {
         var dataPoint = new DataPoint(temperature, gamma);
+
         if (MeasuredData.Contains(dataPoint))
             return false;
+
+        for(int i = 0; i < MeasuredData.Count; ++i)
+        {
+            if (dataPoint.Temperature < MeasuredData[i].Temperature)
+            {
+                MeasuredData.Insert(i, dataPoint);
+                return true;
+            }
+        }
 
         MeasuredData.Add(dataPoint);
         return true;
