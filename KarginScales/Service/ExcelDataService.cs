@@ -6,10 +6,9 @@ using System.Linq;
 
 namespace KarginScales.Service;
 
-public static class ExcelDataService 
+public class ExcelDataService : IDataService
 {
-    public static string ErrorMessage = "";
-    public static List<Polymer> LoadDataFromFile(string path)
+    public LoadResult<List<Polymer>> LoadData(string path)
     {
         try
         {
@@ -22,16 +21,15 @@ public static class ExcelDataService
                 result.Add(polymer);
             }
 
-            return result;
+            return LoadResult<List<Polymer>>.Success(result);
         }
         catch(Exception ex)
         {
-            ErrorMessage = $"Ошибка при загрузке данных из Excel: {ex.Message}";
-            return null;
+            return LoadResult<List<Polymer>>.Failure($"Ошибка при загрузке данных из Excel: {ex.Message}");
         }
     }
 
-    private static IEnumerable<DataPoint> GetListData(IXLRange? range)
+    private IEnumerable<DataPoint> GetListData(IXLRange? range)
     {
         for (int row = 2; row <= range?.RowCount(); ++row)
         {

@@ -12,6 +12,9 @@ public class MainViewModel : Notifier
 {
     #region Fields
 
+    private IDialogService _dialogDataService;
+    private IDataService _dataService;
+
     private double _currentTemperature;
     private double _setupTemperature;
     private double _gamma;
@@ -20,19 +23,24 @@ public class MainViewModel : Notifier
     public List<Polymer> Polymers { get; }
     #endregion
 
-    public MainViewModel(IDialogService dialog)
+    #region Initialize
+    public MainViewModel(IDialogService dialogDataService, IDataService dataService)
     {
         string pathFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content\\D.xlsx");
+        _dialogDataService = dialogDataService;
+        _dataService = dataService;
 
+        var result = _dataService.LoadData(pathFile);
 
-        Polymers = ExcelDataService.LoadDataFromFile(pathFile);
-
-        if (Polymers == null)
+        if (result.IsSuccess)
+            Polymers = result.Data;
+        else
         {
-            dialog.ShowMessage(ExcelDataService.ErrorMessage, "Проверьте подключение");
+            _dialogDataService.ShowMessage(result.ErrorMessage, "Проверьте подключение");
+            Polymers = new List<Polymer>();
         }
 
-        _device = new MeasuringDevice();
+            _device = new MeasuringDevice();
         _device.PropertyChanged += DeviceOnPropertyChanged;
         _device.MeasurementCompleted += OnMeasurementCompleted;
     }
@@ -58,6 +66,8 @@ public class MainViewModel : Notifier
         if (SelectedPolymer != null)
             SelectedPolymer.AddDataPoint(e.Temperature, e.Gamma);
     }
+
+    #endregion
 
     #region Propereties
 
