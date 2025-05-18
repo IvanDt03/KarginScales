@@ -7,33 +7,34 @@
         xmlns:vm="clr-namespace:KarginScales.ViewModels"
         xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800">
+        Title="MainWindow" Height="550" Width="800">
 
-    <Grid>
+    <Grid Background="LightGray">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="0.75*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="1">
-            <TextBlock Margin="10" HorizontalAlignment="Center">Прибрная панель</TextBlock>
+            <TextBlock Margin="0 23 0 10" Style="{StaticResource styleTextBlockTheme}">Приборная панель</TextBlock>
             <StackPanel Margin="10" Orientation="Horizontal">
-                <TextBlock VerticalAlignment="Center">Выбор образца:</TextBlock>
+                <TextBlock VerticalAlignment="Center" Style="{StaticResource styleTextBlockSelected}">Выбор образца:</TextBlock>
                 <ComboBox x:Name="cmbPoly" Margin="10 0 0 0" Width="200"
                           ItemsSource="{Binding Polymers}"
                           SelectedItem="{Binding SelectedPolymer}"
                           DisplayMemberPath="Name"></ComboBox>
             </StackPanel>
-            <Grid Margin="0 30 0 0">
+            <Grid Margin="0 20 0 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <view:LCDData Grid.Column="0" Title="Максимальная" Data="{Binding SelectedPolymer.MaxT}"/>
-                <view:LCDData x:Name="minT" Grid.Column="1" Title="Минимальная" Data="{Binding SelectedPolymer.MinT}"/>
+                <view:LCDData Grid.Column="0" Title="Максимальная" Data="{Binding SelectedPolymer.MaxT}"
+                              TextForeground="Red"/>
+                <view:LCDData x:Name="minT" Grid.Column="1" Title="Минимальная" Data="{Binding SelectedPolymer.MinT}"
+                              TextForeground="Red"/>
             </Grid>
-            <TextBlock Margin="0 40 0 20" 
-                       HorizontalAlignment="Center">Область нагрева/охлажения</TextBlock>
+            <TextBlock Margin="0 40 0 20" Style="{StaticResource styleTextBlockTheme}">Область нагрева/охлажения</TextBlock>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
@@ -41,32 +42,34 @@
                 </Grid.ColumnDefinitions>
 
                 <view:LCDData x:Name="curr" Grid.Column="0" Title="Текущая температура"
-                              Data="{Binding CurrentTemperature}"/>
+                              Data="{Binding CurrentTemperature}" TextForeground="LawnGreen"/>
 
                 <StackPanel Grid.Column="1" HorizontalAlignment="Center">
-                    <view:LCDData x:Name="setup" Title="Установка температуры" Data="{Binding SetupTemperature, Mode=TwoWay}"/>
+                    <view:LCDData x:Name="setup" Title="Установка температуры" Data="{Binding SetupTemperature, Mode=TwoWay}"
+                                  TextForeground="Yellow"/>
                     <Grid Margin="7">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button Margin="3" Grid.Column="0" Command="{Binding RaiseTemp}">Up</Button>
-                        <Button Margin="3" Grid.Column="1" Command="{Binding LowerTemp}">Down</Button>
+                        <Button Margin="3" Grid.Column="0" Command="{Binding RaiseTemp}" FontSize="20">🡅</Button>
+                        <Button Margin="3" Grid.Column="1" Command="{Binding LowerTemp}" FontSize="20">🡇</Button>
                     </Grid>
                 </StackPanel>
 
             </Grid>
-            <view:LCDData Margin="0 20 0 10" Title="Гамма (деформация)" Data="{Binding Gamma}"/>
+            <view:LCDData Margin="0 20 0 10" Title="Гамма (деформация)" Data="{Binding Gamma}"
+                          TextForeground="DarkOrange"/>
             <Button Margin="0 25 0 0" Content="Пуск" Command="{Binding StartMeasurement}"></Button>
         </StackPanel>
-        
+
         <TabControl Grid.Column="0">
-            <TabItem Header="Весы Карига"></TabItem>
+            <TabItem Header="Весы Каргина"></TabItem>
             <TabItem Header="Данные измерения">
                 <DataGrid ItemsSource="{Binding SelectedPolymer.MeasuredData}" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Температура" Binding="{Binding Temperature}"/>
-                        <DataGridTextColumn Header="Гамма" Binding="{Binding Gamma}"/>
+                        <DataGridTextColumn Header="Температура" Width="*" Binding="{Binding Temperature}"/>
+                        <DataGridTextColumn Header="Гамма" Width="*" Binding="{Binding Gamma}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>

@@ -27,7 +27,7 @@ public class MainViewModel : Notifier
     #region Initialize
     public MainViewModel(IDialogService dialogDataService, IDataService dataService)
     {
-        string pathFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content\\D.xlsx");
+        string pathFile = "Content\\D.xlsx";
         _dialogDataService = dialogDataService;
         _dataService = dataService;
 
