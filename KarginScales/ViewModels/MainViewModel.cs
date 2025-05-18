@@ -20,7 +20,8 @@ public class MainViewModel : Notifier
     private double _gamma;
     private MeasuringDevice _device;
     private Polymer _selectedPolymer;
-    public List<Polymer>? Polymers { get; }
+    private ChartViewModel _plot;
+    
     #endregion
 
     #region Initialize
@@ -40,9 +41,11 @@ public class MainViewModel : Notifier
             Polymers = new List<Polymer>();
         }
 
-            _device = new MeasuringDevice();
+        _device = new MeasuringDevice();
         _device.PropertyChanged += DeviceOnPropertyChanged;
         _device.MeasurementCompleted += OnMeasurementCompleted;
+
+        _plot = new ChartViewModel();
     }
 
     private void DeviceOnPropertyChanged(object? sender, PropertyChangedEventArgs args)
@@ -63,13 +66,16 @@ public class MainViewModel : Notifier
 
     private void OnMeasurementCompleted(object? sender, MeasurementCompletedEventArgs e)
     {
-        if (SelectedPolymer != null)
-            SelectedPolymer.AddDataPoint(e.Temperature, e.Gamma);
+        if (SelectedPolymer == null)
+            return;
+
+        SelectedPolymer.AddDataPoint(e.Temperature, e.Gamma);
     }
 
     #endregion
 
     #region Propereties
+    public List<Polymer>? Polymers { get; }
 
     public double CurrentTemperature
     {
@@ -98,6 +104,15 @@ public class MainViewModel : Notifier
         }
     }
 
+    public ChartViewModel Plot
+    {
+        get { return _plot; }
+        set
+        {
+            SetValue(ref _plot, value, nameof(Plot));
+        }
+    }
+
     public Polymer SelectedPolymer
     {
         get { return _selectedPolymer; }
@@ -107,8 +122,10 @@ public class MainViewModel : Notifier
             CurrentTemperature = Math.Ceiling(_selectedPolymer.MinT);
             SetupTemperature = Math.Ceiling(_selectedPolymer.MinT);
             Gamma = 0.0;
+            Plot.UpdateChart(SelectedPolymer);
         }
     }
+
 
     #endregion
 

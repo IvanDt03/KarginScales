@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:KarginScales"
         xmlns:view="clr-namespace:KarginScales.Views"
         xmlns:vm="clr-namespace:KarginScales.ViewModels"
+        xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="800">
 
@@ -14,7 +14,6 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="0.75*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-
 
         <StackPanel Grid.Column="1">
             <TextBlock Margin="10" HorizontalAlignment="Center">Прибрная панель</TextBlock>
@@ -51,8 +50,8 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button Margin="3" Grid.Column="0" Command="{Binding RaiseTemp}"> Up</Button>
-                        <Button Margin="3" Grid.Column="1" Command="{Binding LowerTemp}"> Down</Button>
+                        <Button Margin="3" Grid.Column="0" Command="{Binding RaiseTemp}">Up</Button>
+                        <Button Margin="3" Grid.Column="1" Command="{Binding LowerTemp}">Down</Button>
                     </Grid>
                 </StackPanel>
 
@@ -60,7 +59,7 @@
             <view:LCDData Margin="0 20 0 10" Title="Гамма (деформация)" Data="{Binding Gamma}"/>
             <Button Margin="0 25 0 0" Content="Пуск" Command="{Binding StartMeasurement}"></Button>
         </StackPanel>
-
+        
         <TabControl Grid.Column="0">
             <TabItem Header="Весы Карига"></TabItem>
             <TabItem Header="Данные измерения">
@@ -71,7 +70,12 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
-            <TabItem Header="График"></TabItem>
+            <TabItem Header="График">
+                <lvc:CartesianChart Series="{Binding Plot.Series}"
+                                    XAxes="{Binding Plot.XAxis}"
+                                    YAxes="{Binding Plot.YAxis}" 
+                                    ZoomMode="None"/>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

@@ -1,7 +1,6 @@
 ﻿using KarginScales.Service;
 using KarginScales.ViewModels;
 using System.Windows;
-using System.Windows.Threading;
 
 
 namespace KarginScales.Views;
