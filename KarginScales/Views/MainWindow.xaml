@@ -9,10 +9,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="800">
 
-    <Window.DataContext>
-        <vm:MainViewModel></vm:MainViewModel>
-    </Window.DataContext>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>

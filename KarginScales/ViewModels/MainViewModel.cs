@@ -20,10 +20,17 @@ public class MainViewModel : Notifier
     public List<Polymer> Polymers { get; }
     #endregion
 
-    public MainViewModel()
+    public MainViewModel(IDialogService dialog)
     {
         string pathFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content\\D.xlsx");
-        Polymers = new List<Polymer>(ExcelDataService.LoadDataFromFile(pathFile));
+
+
+        Polymers = ExcelDataService.LoadDataFromFile(pathFile);
+
+        if (Polymers == null)
+        {
+            dialog.ShowMessage(ExcelDataService.ErrorMessage, "Проверьте подключение");
+        }
 
         _device = new MeasuringDevice();
         _device.PropertyChanged += DeviceOnPropertyChanged;

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using KarginScales.ViewModels;
+using System.Windows;
 using System.Windows.Threading;
 
 
@@ -10,6 +11,6 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
 
-        
+        DataContext = new MainViewModel(new MessageBoxDialogService());
     }
 }

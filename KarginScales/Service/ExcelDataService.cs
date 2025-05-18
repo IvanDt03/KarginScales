@@ -11,18 +11,24 @@ public static class ExcelDataService
     public static string ErrorMessage = "";
     public static List<Polymer> LoadDataFromFile(string path)
     {
-        var result = new List<Polymer>();
-
-
+        try
+        {
+            var result = new List<Polymer>();
             using XLWorkbook wb = new XLWorkbook(path);
 
-            foreach(var ws in wb.Worksheets)
+            foreach (var ws in wb.Worksheets)
             {
                 var polymer = new Polymer(ws.Name, GetListData(ws.RangeUsed()).ToList());
                 result.Add(polymer);
             }
-                
-        return result;
+
+            return result;
+        }
+        catch(Exception ex)
+        {
+            ErrorMessage = $"Ошибка при загрузке данных из Excel: {ex.Message}";
+            return null;
+        }
     }
 
     private static IEnumerable<DataPoint> GetListData(IXLRange? range)
