@@ -7,7 +7,15 @@
         xmlns:vm="clr-namespace:KarginScales.ViewModels"
         xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="800">
+        Title="MainWindow" Height="600" Width="800">
+
+    <Window.Resources>
+        <Style x:Key="CellStyle" TargetType="DataGridCell">
+            <Style.Setters>
+                <Setter Property="TextBlock.TextAlignment" Value="Center" />
+            </Style.Setters>
+        </Style>
+    </Window.Resources>
 
     <Grid Background="LightGray">
         <Grid.ColumnDefinitions>
@@ -58,18 +66,26 @@
                 </StackPanel>
 
             </Grid>
-            <view:LCDData Margin="0 20 0 10" Title="Гамма (деформация)" Data="{Binding Gamma}"
+            <view:LCDData Margin="0 20 0 0" Title="Гамма (деформация)" Data="{Binding Gamma}"
                           TextForeground="DarkOrange"/>
-            <Button Margin="0 25 0 0" Content="Пуск" Command="{Binding StartMeasurement}"></Button>
+            <Button Margin="0 25 0 0" Content="Пуск" Height="45" MaxWidth="150" Command="{Binding StartMeasurement}"></Button>
         </StackPanel>
 
         <TabControl Grid.Column="0">
-            <TabItem Header="Весы Каргина"></TabItem>
+            <TabItem Header="Весы Каргина">
+                <view:Scales></view:Scales>
+            </TabItem>
             <TabItem Header="Данные измерения">
-                <DataGrid ItemsSource="{Binding SelectedPolymer.MeasuredData}" AutoGenerateColumns="False">
+                <DataGrid ItemsSource="{Binding SelectedPolymer.MeasuredData}" AutoGenerateColumns="False"
+                          IsReadOnly="True" CanUserSortColumns="False" HorizontalGridLinesBrush="{x:Null}">
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Температура" Width="*" Binding="{Binding Temperature}"/>
-                        <DataGridTextColumn Header="Гамма" Width="*" Binding="{Binding Gamma}"/>
+                        <DataGridTextColumn Header="Температура" Width="*" Binding="{Binding Temperature}" CellStyle="{StaticResource CellStyle}"/>
+                        <DataGridTextColumn Header="Гамма" Width="*" Binding="{Binding Gamma, StringFormat={}{0:F3}}" CellStyle="{StaticResource CellStyle}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>

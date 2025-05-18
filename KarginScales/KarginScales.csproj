@@ -9,8 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Content\ArDn.bmp" />
-    <None Remove="Content\ArUp.bmp" />
     <None Remove="Content\D.xlsx" />
     <None Remove="Content\digitalcyrillic1-_1.ttf" />
   </ItemGroup>
@@ -27,8 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Content\ArDn.bmp" />
-    <Resource Include="Content\ArUp.bmp" />
     <Resource Include="Content\digitalcyrillic1-_1.ttf" />
   </ItemGroup>
 
