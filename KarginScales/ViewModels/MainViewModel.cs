@@ -20,7 +20,7 @@ public class MainViewModel : Notifier
     private double _gamma;
     private MeasuringDevice _device;
     private Polymer _selectedPolymer;
-    public List<Polymer> Polymers { get; }
+    public List<Polymer>? Polymers { get; }
     #endregion
 
     #region Initialize
@@ -45,7 +45,7 @@ public class MainViewModel : Notifier
         _device.MeasurementCompleted += OnMeasurementCompleted;
     }
 
-    private void DeviceOnPropertyChanged(object sender, PropertyChangedEventArgs args)
+    private void DeviceOnPropertyChanged(object? sender, PropertyChangedEventArgs args)
     {
         switch (args.PropertyName)
         {
@@ -61,7 +61,7 @@ public class MainViewModel : Notifier
         }
     }
 
-    private void OnMeasurementCompleted(object sender, MeasurementCompletedEventArgs e)
+    private void OnMeasurementCompleted(object? sender, MeasurementCompletedEventArgs e)
     {
         if (SelectedPolymer != null)
             SelectedPolymer.AddDataPoint(e.Temperature, e.Gamma);
@@ -104,14 +104,13 @@ public class MainViewModel : Notifier
         set
         {
             SetValue(ref _selectedPolymer, value, nameof(SelectedPolymer));
-            CurrentTemperature = _selectedPolymer.MinT;
-            SetupTemperature = _selectedPolymer.MinT;
+            CurrentTemperature = Math.Ceiling(_selectedPolymer.MinT);
+            SetupTemperature = Math.Ceiling(_selectedPolymer.MinT);
             Gamma = 0.0;
         }
     }
 
     #endregion
-
 
     #region Commands
 
@@ -125,7 +124,7 @@ public class MainViewModel : Notifier
     }
     public RelayCommand LowerTemp
     {
-        get { return _lowerTemp ?? (_lowerTemp = new RelayCommand(o => --SetupTemperature, o => SetupTemperature > SelectedPolymer?.MinT)); }
+        get { return _lowerTemp ?? (_lowerTemp = new RelayCommand(o => --SetupTemperature, o => (SetupTemperature - 1) > SelectedPolymer?.MinT)); }
     }
     public RelayCommand StartMeasurement
     {
@@ -139,5 +138,4 @@ public class MainViewModel : Notifier
     }
 
     #endregion
-
 }
