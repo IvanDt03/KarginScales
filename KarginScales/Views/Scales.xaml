@@ -16,15 +16,15 @@
                             <RectangleGeometry Rect="100,300,200,20"/>
                         </CombinedGeometry.Geometry1>
                         <CombinedGeometry.Geometry2>
-                            <RectangleGeometry Rect="180,290,30,10"/>
+                            <RectangleGeometry Rect="185,290,30,10"/>
                         </CombinedGeometry.Geometry2>
                     </CombinedGeometry>
                 </Path.Data>
             </Path>
-            <Rectangle Canvas.Left="170" Canvas.Top="254" Width="50" Height="35" Fill="Black" RadiusX="10" RadiusY="10"/>
-            <Path Data="M 140,270 L 140,290 L 250,290 L 250,270" Stroke="DarkGray" StrokeThickness="4"/>
-            <Path Data="M 138,280 L 100,280 L 60,240" Stroke="Black" StrokeThickness="2"/>
-            <Path Fill="LightGray" Stroke="DarkGray" StrokeThickness="2">
+            <Rectangle Canvas.Left="175" Canvas.Top="254" Width="50" Height="35" Fill="Black" RadiusX="10" RadiusY="10"/>
+            <Path Data="M 145,270 L 145,290 L 255,290 L 255,270" Stroke="DarkGray" StrokeThickness="4"/>
+            <Path Data="M 143,280 L 100,280 L 60,240" Stroke="Black" StrokeThickness="2"/>
+            <Path Fill="LightGray" Stroke="SlateGray" StrokeThickness="2">
                 <Path.Data>
                     <GeometryGroup>
                         <RectangleGeometry Rect="30,180,60,60" RadiusX="10" RadiusY="10"/>
@@ -32,11 +32,11 @@
                     </GeometryGroup>
                 </Path.Data>
             </Path>
-            <Path Fill="SaddleBrown" Stroke="Black" StrokeThickness="2" Data="M 195,240 L 185,225 L 205,225 Z"/>
-            <Rectangle Canvas.Left="185" Canvas.Top="124" Width="20" Height="100" Fill="LightGray" Stroke="DarkGray" StrokeThickness="2"/>
-            <Path Stroke="DarkGray" StrokeThickness="2" Data="M 140,110 L 140,123 L 250,123 L 250,110"></Path>
-            <Rectangle Canvas.Left="170" Canvas.Top="85" Width="50" Height="30" Fill="Black"/>
-            <Line X1="220" Y1="100" X2="300" Y2="100" Stroke="Black" StrokeThickness="3"/>
+            <Path Fill="SaddleBrown" Stroke="Black" StrokeThickness="2" Data="M 200,240 L 190,225 L 210,225 Z"/>
+            <Rectangle Canvas.Left="190" Canvas.Top="124" Width="20" Height="100" Fill="LightGray" Stroke="DarkGray" StrokeThickness="2"/>
+            <Path Stroke="DarkGray" StrokeThickness="2" Data="M 145,110 L 145,123 L 255,123 L 255,110"></Path>
+            <Rectangle Canvas.Left="175" Canvas.Top="85" Width="50" Height="30" Fill="Black"/>
+            <Line X1="225" Y1="100" X2="305" Y2="100" Stroke="Black" StrokeThickness="3"/>
             <Path Fill="LightGray" Stroke="Black" StrokeThickness="2">
                 <Path.Data>
                     <GeometryGroup>
@@ -45,9 +45,32 @@
                     </GeometryGroup>
                 </Path.Data>
             </Path>
+            <Ellipse Canvas.Left="59" Canvas.Top="220" Fill="Black" Width="4" Height="4"/>
+            <Path Stroke="Black" StrokeThickness="1" Fill="Black" Data="M 61,222 L 50,210 L 50,215 L 55,210 L 50,210" StrokeLineJoin="Round"/>
+            <Path Stroke="Black" StrokeThickness="1" StrokeEndLineCap="Round" StrokeStartLineCap="Round">
+                <Path.Data>
+                    <PathGeometry>
+                        <PathFigure StartPoint="43,207">
+                            <ArcSegment Point="77,207" Size="55, 150" SweepDirection="Clockwise"/>
+                        </PathFigure>
+                    </PathGeometry>
+                </Path.Data>
+            </Path>
+            <Line X1="43" Y1="207" X2="45" Y2="210" Stroke="Black" StrokeThickness="1" StrokeEndLineCap="Triangle"/>
+            <Line X1="50" Y1="202" X2="52" Y2="206" Stroke="Black" StrokeThickness="1" StrokeEndLineCap="Triangle"/>
+            <Line X1="60" Y1="200" X2="60" Y2="204" Stroke="Black" StrokeThickness="1" StrokeEndLineCap="Triangle"/>
+            <Line X1="70" Y1="202" X2="68" Y2="206" Stroke="Black" StrokeThickness="1" StrokeEndLineCap="Triangle"/>
+            <Line X1="77" Y1="207" X2="75" Y2="210" Stroke="Black" StrokeThickness="1" StrokeEndLineCap="Triangle"/>
+            
 
-            <TextBlock Canvas.Left="235" Canvas.Top="250" Text="Полимер"/>
+
+
+
+            <TextBlock Canvas.Left="250" Canvas.Top="250" Text="Полимер"/>
             <TextBlock Canvas.Left="260" Canvas.Top="190" Text="Опускание груза"/>
+            <TextBlock Canvas.Left="185" Canvas.Top="50" Text="Груз"/>
+            <TextBlock Canvas.Left="10" Canvas.Top="140" Text="Регистрирующее устройство" TextWrapping="Wrap" Width="100" TextAlignment="Center"/>
         </Canvas>
     </Viewbox>
 </UserControl>
+ 
