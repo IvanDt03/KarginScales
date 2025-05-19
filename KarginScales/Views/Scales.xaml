@@ -34,9 +34,20 @@
             </Path>
             <Path Fill="SaddleBrown" Stroke="Black" StrokeThickness="2" Data="M 195,240 L 185,225 L 205,225 Z"/>
             <Rectangle Canvas.Left="185" Canvas.Top="124" Width="20" Height="100" Fill="LightGray" Stroke="DarkGray" StrokeThickness="2"/>
-            <Path Stroke="DarkGray" StrokeThickness="2" Data="M 140,100 L 140,123 L 250,123 L 250,100"></Path>
+            <Path Stroke="DarkGray" StrokeThickness="2" Data="M 140,110 L 140,123 L 250,123 L 250,110"></Path>
             <Rectangle Canvas.Left="170" Canvas.Top="85" Width="50" Height="30" Fill="Black"/>
-            
+            <Line X1="220" Y1="100" X2="300" Y2="100" Stroke="Black" StrokeThickness="3"/>
+            <Path Fill="LightGray" Stroke="Black" StrokeThickness="2">
+                <Path.Data>
+                    <GeometryGroup>
+                        <PathGeometry Figures="M 300,80 L 300,170"/>
+                        <EllipseGeometry Center="300,175" RadiusX="5" RadiusY="5"/>
+                    </GeometryGroup>
+                </Path.Data>
+            </Path>
+
+            <TextBlock Canvas.Left="235" Canvas.Top="250" Text="Полимер"/>
+            <TextBlock Canvas.Left="260" Canvas.Top="190" Text="Опускание груза"/>
         </Canvas>
     </Viewbox>
 </UserControl>
