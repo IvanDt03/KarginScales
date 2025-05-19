@@ -6,6 +6,23 @@
              xmlns:local="clr-namespace:KarginScales.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <Style x:Key="FirePathStyle" TargetType="Path">
+            <Setter Property="Stroke">
+                <Setter.Value>
+                    <LinearGradientBrush>
+                        <GradientStop Color="Yellow" Offset="1"></GradientStop>
+                        <GradientStop Color="Orange" Offset="0.5"></GradientStop>
+                        <GradientStop Color="Red" Offset="0"></GradientStop>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="StrokeThickness" Value="2"/>
+        </Style>
+    </UserControl.Resources>
+    
+    
     <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center"
              MaxHeight="700" MaxWidth="700">
         <Canvas Background="White" Width="400" Height="400">
@@ -61,10 +78,11 @@
             <Line X1="60" Y1="200" X2="60" Y2="204" Stroke="Black" StrokeThickness="1" StrokeEndLineCap="Triangle"/>
             <Line X1="70" Y1="202" X2="68" Y2="206" Stroke="Black" StrokeThickness="1" StrokeEndLineCap="Triangle"/>
             <Line X1="77" Y1="207" X2="75" Y2="210" Stroke="Black" StrokeThickness="1" StrokeEndLineCap="Triangle"/>
-            
-
-
-
+            <Path Data="M 153,273 C 147,285,159,275,153,287" StrokeThickness="2" Style="{StaticResource FirePathStyle}"></Path>
+            <Path Data="M 165,273 C 159,285,171,275,165,287" StrokeThickness="2" Style="{StaticResource FirePathStyle}"></Path>
+            <Path Data="M 245,273 C 239,285,251,275,245,287" StrokeThickness="2" Style="{StaticResource FirePathStyle}"></Path>
+            <Path Data="M 233,273 C 227,285,239,275,233,287" StrokeThickness="2" Style="{StaticResource FirePathStyle}"></Path>
+    
 
             <TextBlock Canvas.Left="250" Canvas.Top="250" Text="Полимер"/>
             <TextBlock Canvas.Left="260" Canvas.Top="190" Text="Опускание груза"/>

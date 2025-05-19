@@ -4,11 +4,8 @@ using LiveChartsCore.Kernel;
 using LiveChartsCore.Kernel.Sketches;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
-using SixLabors.Fonts.Unicode;
 using SkiaSharp;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace KarginScales.ViewModels;
 
@@ -71,13 +68,13 @@ public class ChartViewModel : Notifier
     public ObservableCollection<ICartesianAxis> XAxis
     {
         get { return _xAxis; }
-        set { SetValue(ref _xAxis, value, nameof(XAxis)); }
+        private set { SetValue(ref _xAxis, value, nameof(XAxis)); }
     }
 
     public ObservableCollection<ICartesianAxis> YAxis
     {
         get { return _yAxis; }
-        set { SetValue(ref _yAxis, value, nameof(YAxis)); }
+        private set { SetValue(ref _yAxis, value, nameof(YAxis)); }
     }
 
     public void UpdateChart(Polymer selected)

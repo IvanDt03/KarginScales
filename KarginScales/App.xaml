@@ -7,6 +7,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/TextBlockstyles.xaml"/>
+                <ResourceDictionary Source="/Resources/DataGridStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <FontFamily x:Key="FontForLCDData">pack://application:,,,/Content/#DigitalCyrillic1</FontFamily>
         </ResourceDictionary>

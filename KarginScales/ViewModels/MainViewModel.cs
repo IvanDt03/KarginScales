@@ -1,5 +1,4 @@
 ﻿using KarginScales.Service;
-using System.IO;
 using System;
 using KarginScales.Models;
 using KarginScales.Commands;
@@ -148,7 +147,6 @@ public class MainViewModel : Notifier
         get { return _startMeasurement ?? 
                 (_startMeasurement = new RelayCommand(OnStartMeasurement, o => !_device.IsRunning)); }
     }
-
     private void OnStartMeasurement(object p)
     {
         _device.StartMeasurement(SelectedPolymer, CurrentTemperature, SetupTemperature);
