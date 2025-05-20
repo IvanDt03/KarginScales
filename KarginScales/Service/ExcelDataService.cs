@@ -31,7 +31,7 @@ public class ExcelDataService : IDataService
 
     private IEnumerable<DataPoint> GetListData(IXLRange? range)
     {
-        for (int row = 2; row <= range?.RowCount(); ++row)
+        for (int row = 3; row <= range?.RowCount(); ++row)
         {
             DataPoint point = new DataPoint
             {
