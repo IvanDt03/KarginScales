@@ -14,11 +14,24 @@
 В обновленной программе представлена схема прибора в соответствии с ее действительным строением и внутренними составляющими. Рисунок интуитивно понятен, так как подписи вынесены вблизи соответствующих объектов.
 
 <p align="center">
-	<img src="https://github.com/IvanDt03/KarginScales/blob/main/.github/ShemaA.jpg" alt="FlappyPlane Gameplay" width="300" height="300">
+	<img src="https://github.com/IvanDt03/KarginScales/blob/main/.github/ShemaA.jpg" alt="Схема" width="200" height="200">
         <figcaption>(а) - схема прибора</figcaption>
     </img>
-	<img src="https://github.com/IvanDt03/KarginScales/blob/main/.github/ShemaB.jpg" alt="FlappyPlane Gameplay" width="300" hegiht="300">
+	<img src="https://github.com/IvanDt03/KarginScales/blob/main/.github/ShemaB.jpg" alt="Схема" width="200" hegiht="200">
 		<figcaption>(б) - схема, реализованная в программе</figcaption>
 	</img>
 </p>
 
+
+
+<p align="center">
+	<img src="https://github.com/IvanDt03/KarginScales/blob/main/.github/Inteface1.jpg" alt="Интерфейс программы" width="200" height="200">
+        <figcaption>(а) - схема прибора</figcaption>
+    </img>
+	<img src="https://github.com/IvanDt03/KarginScales/blob/main/.github/Inerface2.jpg" alt="Интерфейс программы" width="200" hegiht="200">
+		<figcaption>(б) - схема, реализованная в программе</figcaption>
+	</img>
+	<img src="https://github.com/IvanDt03/KarginScales/blob/main/.github/Inerface3.jpg" alt="Интерфейс программы" width="200" hegiht="200">
+		<figcaption>(б) - схема, реализованная в программе</figcaption>
+	</img>
+</p>
