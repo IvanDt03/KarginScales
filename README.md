@@ -14,7 +14,11 @@
 В обновленной программе представлена схема прибора в соответствии с ее действительным строением и внутренними составляющими. Рисунок интуитивно понятен, так как подписи вынесены вблизи соответствующих объектов.
 
 <p align="center">
-	<img src="https://github.com/IvanDt03/KarginScales/blob/main/.github/ShemaA.jpg" alt="FlappyPlane Gameplay" width="300"/>
-	<img src="https://github.com/IvanDt03/KarginScales/blob/main/.github/ShemaB.jpg" alt="FlappyPlane Gameplay" width="300"/>
+	<img src="https://github.com/IvanDt03/KarginScales/blob/main/.github/ShemaA.jpg" alt="FlappyPlane Gameplay" width="300" height="300">
+        <figcaption>(а) - схема прибора</figcaption>
+    </img>
+	<img src="https://github.com/IvanDt03/KarginScales/blob/main/.github/ShemaB.jpg" alt="FlappyPlane Gameplay" width="300" hegiht="300">
+		<figcaption>(б) - схема, реализованная в программе</figcaption>
+	</img>
 </p>
 
