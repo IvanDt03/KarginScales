@@ -107,11 +107,11 @@ public class ChartViewModel : Notifier
         {
             dataForTeacher.Values = selected.Data;
 
-            XAxis[0].MinLimit = dataForTeacher.Values.Min(p => p.Temperature);
-            XAxis[0].MaxLimit = dataForTeacher.Values.Max(p => p.Temperature);
+            XAxis[0].MinLimit = dataForTeacher.Values.Min(p => p.Temperature - 1);
+            XAxis[0].MaxLimit = dataForTeacher.Values.Max(p => p.Temperature + 1);
 
-            YAxis[0].MinLimit = dataForTeacher.Values.Min(p => p.Gamma);
-            YAxis[0].MaxLimit = dataForTeacher.Values.Max(p => p.Gamma);
+            YAxis[0].MinLimit = dataForTeacher.Values.Min(p => p.Gamma - 1);
+            YAxis[0].MaxLimit = dataForTeacher.Values.Max(p => p.Gamma + 1);
         }
 
         if (measuredData != null)
