@@ -101,11 +101,11 @@
                     ZoomMode="None"/>
 
                     <StackPanel Margin="10" Grid.Row="1" Orientation="Horizontal">
-                        <PasswordBox x:Name="txtPassword" Margin="0 0 5 0" Width="100" HorizontalContentAlignment="Left" 
+                        <PasswordBox x:Name="txtPassword" Margin="0 0 5 0" Width="100"
                                      VerticalContentAlignment="Center" 
                                      FontSize="16"
                                      Padding="5"
-                                     view:PasswordBoxHelper.Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></PasswordBox>
+                                     view:PasswordBoxHelper.Password="{Binding Password}"></PasswordBox>
                         <Button Margin="5 0 0 0" Padding="5" FontSize="14" Command="{Binding ShowTeacherChart}" CommandParameter="{Binding Password}">Графики для проверки студента</Button>
                         <Button Margin="5 0 0 0" Padding="5" FontSize="14" Command="{Binding HiddenTeachetChart}">Скрыть графики</Button>
                     </StackPanel>

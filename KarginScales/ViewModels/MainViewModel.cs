@@ -107,7 +107,10 @@ public class MainViewModel : Notifier
     public string Password
     {
         get { return _password; }
-        set { SetValue(ref _password, value, nameof(Password)); }
+        set
+        {
+            SetValue(ref _password, value, nameof(Password));
+        }
     }
 
     public ChartViewModel Plot
@@ -182,6 +185,8 @@ public class MainViewModel : Notifier
     {
         Plot.HiddenTeacherChart();
         OnPropertyChanged(nameof(Plot));
+
+        Password = String.Empty;
     }
 
     #endregion

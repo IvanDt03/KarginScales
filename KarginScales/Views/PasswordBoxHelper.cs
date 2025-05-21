@@ -1,42 +1,58 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace KarginScales.Views;
 
 public static class PasswordBoxHelper
 {
+    private static readonly DependencyProperty PasswordInitializedProperty =
+            DependencyProperty.RegisterAttached("PasswordInitialized", typeof(bool), typeof(PasswordBoxHelper), new PropertyMetadata(false));
+
+    private static readonly DependencyProperty SettingPasswordProperty =
+        DependencyProperty.RegisterAttached("SettingPassword", typeof(bool), typeof(PasswordBoxHelper), new PropertyMetadata(false));
+
+    public static string GetPassword(DependencyObject obj)
+    {
+        return (string)obj.GetValue(PasswordProperty);
+    }
+    public static void SetPassword(DependencyObject obj, string value)
+    {
+        obj.SetValue(PasswordProperty, value);
+    }
+
     public static readonly DependencyProperty PasswordProperty =
-        DependencyProperty.RegisterAttached(
-            "Password",
-            typeof(string),
-            typeof(PasswordBoxHelper),
-            new FrameworkPropertyMetadata(string.Empty, OnPasswordPropertyChanged));
+        DependencyProperty.RegisterAttached("Password", typeof(string), typeof(PasswordBoxHelper),
+            new FrameworkPropertyMetadata(Guid.NewGuid().ToString(), HandleBoundPasswordChanged)
+            {
+                BindsTwoWayByDefault = true,
+                DefaultUpdateSourceTrigger = UpdateSourceTrigger.LostFocus
+            });
 
-    public static string GetPassword(DependencyObject d)
+    private static void HandleBoundPasswordChanged(DependencyObject dp, DependencyPropertyChangedEventArgs e)
     {
-        return (string)d.GetValue(PasswordProperty);
-    }
+        var passwordBox = dp as PasswordBox;
+        if (passwordBox == null)
+            return;
 
-    public static void SetPassword(DependencyObject d, string value)
-    {
-        d.SetValue(PasswordProperty, value);
-    }
+        if ((bool)passwordBox.GetValue(SettingPasswordProperty))
+            return;
 
-    private static void OnPasswordPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        if (d is PasswordBox passwordBox)
+        if (!(bool)passwordBox.GetValue(PasswordInitializedProperty))
         {
-            passwordBox.PasswordChanged -= PasswordBox_PasswordChanged;
-            passwordBox.Password = (string)e.NewValue;
-            passwordBox.PasswordChanged += PasswordBox_PasswordChanged;
+            passwordBox.SetValue(PasswordInitializedProperty, true);
+            passwordBox.PasswordChanged += HandlePasswordChanged;
         }
+
+        passwordBox.Password = e.NewValue as string;
     }
 
-    private static void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+    private static void HandlePasswordChanged(object sender, RoutedEventArgs e)
     {
-        if (sender is PasswordBox passwordBox)
-        {
-            SetPassword(passwordBox, passwordBox.Password);
-        }
+        var passwordBox = (PasswordBox)sender;
+        passwordBox.SetValue(SettingPasswordProperty, true);
+        SetPassword(passwordBox, passwordBox.Password);
+        passwordBox.SetValue(SettingPasswordProperty, false);
     }
 }
