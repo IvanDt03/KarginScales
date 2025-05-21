@@ -6,6 +6,7 @@ using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace KarginScales.ViewModels;
 
@@ -14,6 +15,7 @@ public class ChartViewModel : Notifier
     private ObservableCollection<ISeries> _series;
     private ObservableCollection<ICartesianAxis> _xAxis;
     private ObservableCollection<ICartesianAxis> _yAxis;
+    private string _password = "ВМС";
 
     public ChartViewModel()
     {
@@ -23,7 +25,8 @@ public class ChartViewModel : Notifier
             {
                 Values = new ObservableCollection<DataPoint>(),
                 Mapping = (point, index) => new Coordinate(point.Temperature, point.Gamma),
-                Fill = null
+                Fill = null,
+                IsVisible = false,
             },
 
             new LineSeries<DataPoint>
@@ -77,6 +80,21 @@ public class ChartViewModel : Notifier
         private set { SetValue(ref _yAxis, value, nameof(YAxis)); }
     }
 
+    public void ShowTeacherChart(string password)
+    {
+        if (password == _password)
+        {
+            Series[0].IsVisible = true;
+            OnPropertyChanged(nameof(Series));
+        }
+    }
+
+    public void HiddenTeacherChart()
+    {
+        Series[0].IsVisible = false;
+        OnPropertyChanged(nameof(Series));
+    }
+
     public void UpdateChart(Polymer selected)
     {
         if (selected == null)
@@ -86,11 +104,18 @@ public class ChartViewModel : Notifier
         var measuredData = Series[1] as LineSeries<DataPoint>;
 
         if (dataForTeacher != null)
+        {
             dataForTeacher.Values = selected.Data;
+
+            XAxis[0].MinLimit = dataForTeacher.Values.Min(p => p.Temperature);
+            XAxis[0].MaxLimit = dataForTeacher.Values.Max(p => p.Temperature);
+
+            YAxis[0].MinLimit = dataForTeacher.Values.Min(p => p.Gamma);
+            YAxis[0].MaxLimit = dataForTeacher.Values.Max(p => p.Gamma);
+        }
 
         if (measuredData != null)
             measuredData.Values = selected.MeasuredData;
-
 
         OnPropertyChanged(nameof(Series));
     }

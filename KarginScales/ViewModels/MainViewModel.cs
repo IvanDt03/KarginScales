@@ -103,6 +103,13 @@ public class MainViewModel : Notifier
         }
     }
 
+    private string _password;
+    public string Password
+    {
+        get { return _password; }
+        set { SetValue(ref _password, value, nameof(Password)); }
+    }
+
     public ChartViewModel Plot
     {
         get { return _plot; }
@@ -133,6 +140,8 @@ public class MainViewModel : Notifier
     private RelayCommand _raiseTemp;
     private RelayCommand _lowerTemp;
     private RelayCommand _startMeasurement;
+    private RelayCommand _showTeacherChart;
+    private RelayCommand _hiddenTeacherChart;
 
     public RelayCommand RaiseTemp
     {
@@ -147,9 +156,32 @@ public class MainViewModel : Notifier
         get { return _startMeasurement ?? 
                 (_startMeasurement = new RelayCommand(OnStartMeasurement, o => !_device.IsRunning)); }
     }
+    public RelayCommand ShowTeacherChart
+    {
+        get {
+            return _showTeacherChart ??
+                (_showTeacherChart = new RelayCommand(OnShowTeacherChart)); }
+    }
+    public RelayCommand HiddenTeachetChart
+    {
+        get {
+            return _hiddenTeacherChart ??
+                (_hiddenTeacherChart = new RelayCommand(OnHiddenTeacherChart)); }
+    }
     private void OnStartMeasurement(object p)
     {
         _device.StartMeasurement(SelectedPolymer, CurrentTemperature, SetupTemperature);
+    }
+    private void OnShowTeacherChart(object p)
+    {
+        if (p is string password)
+        Plot.ShowTeacherChart(password);
+        OnPropertyChanged(nameof(Plot));
+    }
+    private void OnHiddenTeacherChart(object p)
+    {
+        Plot.HiddenTeacherChart();
+        OnPropertyChanged(nameof(Plot));
     }
 
     #endregion

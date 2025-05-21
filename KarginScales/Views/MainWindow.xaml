@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:KarginScales.ViewModels"
         xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
         mc:Ignorable="d"
-        Title="Весы Каргина" Height="600" Width="850"
+        Title="Весы Каргина" Height="600" Width="900"
         WindowStartupLocation="CenterScreen">
 
     <Grid Background="LightGray">
@@ -88,11 +88,28 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
-            <TabItem Header="График">
-                <lvc:CartesianChart Series="{Binding Plot.Series}"
-                                    XAxes="{Binding Plot.XAxis}"
-                                    YAxes="{Binding Plot.YAxis}" 
-                                    ZoomMode="None"/>
+            <TabItem Header="График" Height="20" VerticalAlignment="Bottom">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <lvc:CartesianChart Grid.Row="0" Series="{Binding Plot.Series}"
+                    XAxes="{Binding Plot.XAxis}"
+                    YAxes="{Binding Plot.YAxis}" 
+                    ZoomMode="None"/>
+
+                    <StackPanel Margin="10" Grid.Row="1" Orientation="Horizontal">
+                        <PasswordBox x:Name="txtPassword" Margin="0 0 5 0" Width="100" HorizontalContentAlignment="Left" 
+                                     VerticalContentAlignment="Center" 
+                                     FontSize="16"
+                                     Padding="5"
+                                     view:PasswordBoxHelper.Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></PasswordBox>
+                        <Button Margin="5 0 0 0" Padding="5" FontSize="14" Command="{Binding ShowTeacherChart}" CommandParameter="{Binding Password}">Графики для проверки студента</Button>
+                        <Button Margin="5 0 0 0" Padding="5" FontSize="14" Command="{Binding HiddenTeachetChart}">Скрыть графики</Button>
+                    </StackPanel>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>
