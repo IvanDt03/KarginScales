@@ -25,13 +25,13 @@
 
 
 <p align="center">
-	<img src="https://github.com/IvanDt03/KarginScales/blob/main/.github/Inteface1.jpg" alt="Èםעונפויס ןנמדנאללû" width="200" height="200">
+	<img src="https://github.com/IvanDt03/KarginScales/blob/main/.github/Inteface1.jpg" alt="Èםעונפויס ןנמדנאללû1" width="200">
         <figcaption>(א) - סץולא ןנטבמנא</figcaption>
     </img>
-	<img src="https://github.com/IvanDt03/KarginScales/blob/main/.github/Inerface2.jpg" alt="Èםעונפויס ןנמדנאללû" width="200" hegiht="200">
+	<img src="https://github.com/IvanDt03/KarginScales/blob/main/.github/Inerface2.jpg" alt="Èםעונפויס ןנמדנאללû2" width="200">
 		<figcaption>(ב) - סץולא, נואכטחמגאםםאÿ ג ןנמדנאללו</figcaption>
 	</img>
-	<img src="https://github.com/IvanDt03/KarginScales/blob/main/.github/Inerface3.jpg" alt="Èםעונפויס ןנמדנאללû" width="200" hegiht="200">
+	<img src="https://github.com/IvanDt03/KarginScales/blob/main/.github/Inerface3.jpg" alt="Èםעונפויס ןנמדנאללû3" width="200">
 		<figcaption>(ב) - סץולא, נואכטחמגאםםאÿ ג ןנמדנאללו</figcaption>
 	</img>
 </p>
