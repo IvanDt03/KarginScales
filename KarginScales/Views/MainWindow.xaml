@@ -10,7 +10,24 @@
         Title="Весы Каргина" Height="600" Width="900"
         WindowStartupLocation="CenterScreen">
 
-    <Grid Background="LightGray">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0">
+            <MenuItem Header="О программе" FontSize="15">
+                <MenuItem Header="GitHub">
+                    <TextBox IsReadOnly="True" Padding="3">https://github.com/IvanDt03/KarginScales</TextBox>
+                </MenuItem>
+                <MenuItem Header="Телеграм">
+                    <TextBox IsReadOnly="True" Padding="3">@ivandt03</TextBox>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        
+        <Grid Grid.Row="1" Background="LightGray">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="0.75*"></ColumnDefinition>
@@ -112,5 +129,6 @@
                 </Grid>
             </TabItem>
         </TabControl>
+    </Grid>
     </Grid>
 </Window>
