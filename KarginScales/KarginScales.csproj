@@ -6,20 +6,20 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>ScalesIcon.ico</ApplicationIcon>
+    <ApplicationIcon>Icon2.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Content\D.xlsx" />
     <None Remove="Content\digitalcyrillic1-_1.ttf" />
-    <None Remove="Content\ScalesIcon.ico" />
+    <None Remove="Content\Icon2.ico" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Content\D.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="ScalesIcon.ico" />
+    <Content Include="Icon2.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,7 +29,7 @@
 
   <ItemGroup>
     <Resource Include="Content\digitalcyrillic1-_1.ttf" />
-    <Resource Include="Content\ScalesIcon.ico" />
+    <Resource Include="Content\Icon2.ico" />
   </ItemGroup>
 
 </Project>

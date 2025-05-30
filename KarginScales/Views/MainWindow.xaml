@@ -8,7 +8,7 @@
         xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
         mc:Ignorable="d"
         Title="Весы Каргина" Height="600" Width="900"
-        WindowStartupLocation="CenterScreen" Icon="/Content/ScalesIcon.ico">
+        WindowStartupLocation="CenterScreen" Icon="/Content/Icon2.ico">
 
     <Grid>
         <Grid.RowDefinitions>
