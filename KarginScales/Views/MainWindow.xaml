@@ -35,7 +35,7 @@
 
         <StackPanel Grid.Column="1" Margin="0 23 0 0">
                 <TextBlock Text="Весы Каригна" FontWeight="Bold" TextDecorations="Underline" FontSize="25"
-                           TextAlignment="Center" Background="LightYellow"/>
+                           TextAlignment="Center"/>
                 <TextBlock Margin="0 23 0 10" Style="{StaticResource styleTextBlockTheme}">Приборная панель</TextBlock>
             <StackPanel Margin="10" Orientation="Horizontal">
                 <TextBlock VerticalAlignment="Center" Style="{StaticResource styleTextBlockSelected}">Выбор образца:</TextBlock>
