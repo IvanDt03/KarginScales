@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:KarginScales.ViewModels"
         xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
         mc:Ignorable="d"
-        Title="Весы Каргина" Height="600" Width="900"
+        Title="Весы Каргина" Height="1000" Width="1600" WindowState="Maximized"
         WindowStartupLocation="CenterScreen" Icon="/Content/Icon2.ico">
 
     <Grid>
@@ -33,14 +33,17 @@
             <ColumnDefinition Width="0.75*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="1">
-            <TextBlock Margin="0 23 0 10" Style="{StaticResource styleTextBlockTheme}">Приборная панель</TextBlock>
+        <StackPanel Grid.Column="1" Margin="0 23 0 0">
+                <TextBlock Text="Весы Каригна" FontWeight="Bold" TextDecorations="Underline" FontSize="25"
+                           TextAlignment="Center" Background="LightYellow"/>
+                <TextBlock Margin="0 23 0 10" Style="{StaticResource styleTextBlockTheme}">Приборная панель</TextBlock>
             <StackPanel Margin="10" Orientation="Horizontal">
                 <TextBlock VerticalAlignment="Center" Style="{StaticResource styleTextBlockSelected}">Выбор образца:</TextBlock>
                 <ComboBox x:Name="cmbPoly" Margin="10 0 0 0" Width="200"
                           ItemsSource="{Binding Polymers}"
                           SelectedItem="{Binding SelectedPolymer}"
-                          DisplayMemberPath="Name"></ComboBox>
+                          DisplayMemberPath="Name"
+                          FontSize="18"></ComboBox>
             </StackPanel>
             <Grid Margin="0 20 0 0">
                 <Grid.ColumnDefinitions>

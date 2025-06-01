@@ -11,7 +11,7 @@
     <UserControl.Resources>
         
         <Style TargetType="TextBlock">
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="18"/>
             <Setter Property="FontFamily" Value="Corbel"/>
         </Style>
 
@@ -54,7 +54,7 @@
     </UserControl.Resources>
     
     <StackPanel HorizontalAlignment="Center">
-        <TextBlock Margin="5" Text="{Binding ElementName=lcdData, Path=Title}"></TextBlock>
+        <TextBlock Margin="10" Text="{Binding ElementName=lcdData, Path=Title}"></TextBlock>
         <TextBox x:Name="dataTextBox" Text="{Binding ElementName=lcdData, Path=Data, StringFormat={}{0:F3}}"
                  Margin="3"
                  IsReadOnly="True"
