@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:KarginScales.ViewModels"
         xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
         mc:Ignorable="d"
-        Title="Весы Каргина" Height="1000" Width="1600" WindowState="Maximized"
+        Title="Весы Каргина" Height="1000" Width="1600"
         WindowStartupLocation="CenterScreen" Icon="/Content/Icon2.ico">
 
     <Grid>
